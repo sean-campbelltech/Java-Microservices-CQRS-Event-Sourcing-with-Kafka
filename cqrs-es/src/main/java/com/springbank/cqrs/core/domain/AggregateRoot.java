@@ -10,13 +10,25 @@ import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Getter
 public abstract class AggregateRoot {
 
     protected UUID id;
+    private int version;
 
     private final List<BaseEvent> changes = new ArrayList<>();
     private final Logger logger = Logger.getLogger(AggregateRoot.class.getName());
+
+    public UUID getId() {
+        return this.id;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
 
     public List<BaseEvent> getUncommittedChanges(){
         return changes;
@@ -48,4 +60,7 @@ public abstract class AggregateRoot {
             if (isNewEvent) changes.add(event);
         }
     }
+
+
+
 }

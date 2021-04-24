@@ -18,7 +18,7 @@ public class AccountCommandHandler implements CommandHandler {
     @Override
     public void handle(OpenAccountCommand command) {
         var aggregate = new AccountAggregate(command);
-        eventSourcingHandler.save(aggregate, -1);
+        eventSourcingHandler.save(aggregate);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class AccountCommandHandler implements CommandHandler {
         var aggregate = eventSourcingHandler.getById(command.getId());
         aggregate.depositFunds(command.getAmount());
 
-        eventSourcingHandler.save(aggregate, command.getExpectedVersion());
+        eventSourcingHandler.save(aggregate);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class AccountCommandHandler implements CommandHandler {
         var aggregate = eventSourcingHandler.getById(command.getId());
         aggregate.withdrawFunds(command.getAmount());
 
-        eventSourcingHandler.save(aggregate, command.getExpectedVersion());
+        eventSourcingHandler.save(aggregate);
     }
 
     @Override
@@ -42,6 +42,6 @@ public class AccountCommandHandler implements CommandHandler {
         var aggregate = eventSourcingHandler.getById(command.getId());
         aggregate.closeAccount();
 
-        eventSourcingHandler.save(aggregate, command.getExpectedVersion());
+        eventSourcingHandler.save(aggregate);
     }
 }

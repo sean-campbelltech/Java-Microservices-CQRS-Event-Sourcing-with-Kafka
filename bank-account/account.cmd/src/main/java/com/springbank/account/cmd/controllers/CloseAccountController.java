@@ -1,10 +1,8 @@
 package com.springbank.account.cmd.controllers;
 
 import com.springbank.account.cmd.commands.CloseAccountCommand;
-import com.springbank.account.cmd.commands.DepositFundsCommand;
 import com.springbank.account.cmd.dto.OpenAccountResponse;
 import com.springbank.account.common.dto.BaseResponse;
-import com.springbank.account.common.events.AccountClosedEvent;
 import com.springbank.cqrs.core.infrastructure.CommandDispatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -12,6 +12,5 @@ public class BaseCommand extends Message {
     public BaseCommand(UUID id) {
         super(id);
     }
-    private int expectedVersion;
 }
 

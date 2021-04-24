@@ -7,7 +7,9 @@ import com.springbank.cqrs.core.infrastructure.EventStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class AccountEventSourcingHandler implements EventSourcingHandler<AccountAggregate> {
@@ -16,8 +18,8 @@ public class AccountEventSourcingHandler implements EventSourcingHandler<Account
     private EventStore eventStore;
 
     @Override
-    public void save(AggregateRoot aggregate, int expectedVersion) {
-        eventStore.saveEvents(aggregate.getId(), aggregate.getUncommittedChanges(), expectedVersion);
+    public void save(AggregateRoot aggregate) {
+        eventStore.saveEvents(aggregate.getId(), aggregate.getUncommittedChanges(), aggregate.getVersion());
         aggregate.markChangesAsCommitted();
     }
 
@@ -26,7 +28,10 @@ public class AccountEventSourcingHandler implements EventSourcingHandler<Account
         var aggregate = new AccountAggregate();
         var events = eventStore.getEvents(id);
         aggregate.replayEvents(events);
-
+        if (aggregate != null) {
+            var latestVersion = events.stream().map(x -> x.getVersion()).max(Comparator.naturalOrder());
+            aggregate.setVersion(latestVersion.get());
+        }
         return aggregate;
     }
 }
