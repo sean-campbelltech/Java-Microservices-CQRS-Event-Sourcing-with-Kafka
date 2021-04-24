@@ -52,7 +52,7 @@ public class AccountEventStore implements EventStore {
 
             // only produce event if event was successfully persisted to the event store
             if (persistedEvent != null) {
-                eventProducer.produce(event.getClass().toString(), event);
+                eventProducer.produce(event.getClass().getSimpleName(), event);
             }
         }
     }

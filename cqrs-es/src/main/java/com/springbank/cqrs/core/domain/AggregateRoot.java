@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 public abstract class AggregateRoot {
 
     protected UUID id;
-    private int version;
+    private int version = -1;
 
     private final List<BaseEvent> changes = new ArrayList<>();
     private final Logger logger = Logger.getLogger(AggregateRoot.class.getName());

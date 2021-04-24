@@ -25,7 +25,6 @@ public class AccountCommandHandler implements CommandHandler {
     public void handle(DepositFundsCommand command) {
         var aggregate = eventSourcingHandler.getById(command.getId());
         aggregate.depositFunds(command.getAmount());
-
         eventSourcingHandler.save(aggregate);
     }
 
@@ -33,7 +32,6 @@ public class AccountCommandHandler implements CommandHandler {
     public void handle(WithdrawFundsCommand command) {
         var aggregate = eventSourcingHandler.getById(command.getId());
         aggregate.withdrawFunds(command.getAmount());
-
         eventSourcingHandler.save(aggregate);
     }
 
@@ -41,7 +39,6 @@ public class AccountCommandHandler implements CommandHandler {
     public void handle(CloseAccountCommand command) {
         var aggregate = eventSourcingHandler.getById(command.getId());
         aggregate.closeAccount();
-
         eventSourcingHandler.save(aggregate);
     }
 }

@@ -17,7 +17,7 @@ import java.util.UUID;
 @Entity
 public class BankAccount {
     @Id
-    private UUID id;
+    private String id;
     private String accountHolder;
     private Date creationDate;
     private AccountType accountType;
