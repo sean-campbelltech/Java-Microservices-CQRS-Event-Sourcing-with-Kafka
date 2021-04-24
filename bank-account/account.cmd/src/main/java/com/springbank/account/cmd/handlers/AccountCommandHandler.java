@@ -31,6 +31,9 @@ public class AccountCommandHandler implements CommandHandler {
     @Override
     public void handle(WithdrawFundsCommand command) {
         var aggregate = eventSourcingHandler.getById(command.getId());
+        if (command.getAmount() > aggregate.getBalance()) {
+            throw new IllegalStateException("Withdrawal declined, insufficient funds!");
+        }
         aggregate.withdrawFunds(command.getAmount());
         eventSourcingHandler.save(aggregate);
     }
