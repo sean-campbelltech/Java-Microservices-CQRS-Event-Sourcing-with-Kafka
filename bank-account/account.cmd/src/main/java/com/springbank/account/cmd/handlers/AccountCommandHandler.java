@@ -5,7 +5,7 @@ import com.springbank.account.cmd.commands.OpenAccountCommand;
 import com.springbank.account.cmd.domain.AccountAggregate;
 import com.springbank.account.cmd.commands.DepositFundsCommand;
 import com.springbank.account.cmd.commands.WithdrawFundsCommand;
-import com.springbank.cqrs.core.infrastructure.EventSourcingHandler;
+import com.springbank.cqrs.core.handlers.EventSourcingHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

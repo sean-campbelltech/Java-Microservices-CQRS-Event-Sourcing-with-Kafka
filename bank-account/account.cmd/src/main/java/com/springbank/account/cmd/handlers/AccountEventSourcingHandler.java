@@ -2,7 +2,7 @@ package com.springbank.account.cmd.handlers;
 
 import com.springbank.account.cmd.domain.AccountAggregate;
 import com.springbank.cqrs.core.domain.AggregateRoot;
-import com.springbank.cqrs.core.infrastructure.EventSourcingHandler;
+import com.springbank.cqrs.core.handlers.EventSourcingHandler;
 import com.springbank.cqrs.core.infrastructure.EventStore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

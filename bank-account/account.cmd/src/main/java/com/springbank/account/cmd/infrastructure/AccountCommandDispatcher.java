@@ -3,7 +3,7 @@ package com.springbank.account.cmd.infrastructure;
 import com.springbank.cqrs.core.commands.BaseCommand;
 import com.springbank.cqrs.core.infrastructure.CommandDispatcher;
 import com.springbank.cqrs.core.messages.Message;
-import com.springbank.cqrs.core.messages.MessageHandler;
+import com.springbank.cqrs.core.handlers.MessageHandler;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

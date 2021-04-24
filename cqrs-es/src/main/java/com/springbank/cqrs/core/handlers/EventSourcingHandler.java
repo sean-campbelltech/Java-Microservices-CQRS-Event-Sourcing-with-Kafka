@@ -1,4 +1,4 @@
-package com.springbank.cqrs.core.infrastructure;
+package com.springbank.cqrs.core.handlers;
 
 import com.springbank.cqrs.core.domain.AggregateRoot;
 
