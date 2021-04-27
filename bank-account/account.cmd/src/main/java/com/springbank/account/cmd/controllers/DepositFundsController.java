@@ -3,6 +3,7 @@ package com.springbank.account.cmd.controllers;
 import com.springbank.account.cmd.commands.DepositFundsCommand;
 import com.springbank.account.cmd.dto.OpenAccountResponse;
 import com.springbank.account.common.dto.BaseResponse;
+import com.springbank.cqrs.core.exceptions.AggregateNotFoundException;
 import com.springbank.cqrs.core.infrastructure.CommandDispatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.MessageFormat;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,13 +23,13 @@ public class DepositFundsController {
     private CommandDispatcher commandDispatcher;
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<BaseResponse> depositFunds(@PathVariable(value = "id") UUID id,
+    public ResponseEntity<BaseResponse> depositFunds(@PathVariable(value = "id") String id,
                                                      @RequestBody DepositFundsCommand command) {
         try {
             command.setId(id);
             commandDispatcher.send(command);
             return new ResponseEntity<>(new BaseResponse("Deposit funds request successfully completed!"), HttpStatus.OK);
-        } catch (IllegalStateException e) {
+        } catch (IllegalStateException | AggregateNotFoundException e) {
             logger.log(Level.INFO, MessageFormat.format("Client made a bad request - {0}.", e.toString()));
             return new ResponseEntity<>(new BaseResponse(e.toString()), HttpStatus.BAD_REQUEST);
         } catch (Exception e) {

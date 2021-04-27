@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Repository
 public interface EventStoreRepository extends MongoRepository<EventModel, String> {
-    List<EventModel> findByAggregateIdentifier(UUID aggregateId);
+    List<EventModel> findByAggregateIdentifier(String aggregateId);
 }

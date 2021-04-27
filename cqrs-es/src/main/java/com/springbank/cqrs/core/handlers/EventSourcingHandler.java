@@ -6,5 +6,5 @@ import java.util.UUID;
 
 public interface EventSourcingHandler<T> {
     void save(AggregateRoot aggregate);
-    T getById(UUID id);
+    T getById(String id);
 }

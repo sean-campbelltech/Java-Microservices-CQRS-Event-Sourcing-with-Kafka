@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.UUID;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +25,7 @@ public class AccountEventStore implements EventStore {
     private EventStoreRepository eventStoreRepository;
 
     @Override
-    public <T extends AggregateRoot> void saveEvents(UUID aggregateId, Iterable<BaseEvent> events, int expectedVersion) {
+    public <T extends AggregateRoot> void saveEvents(String aggregateId, Iterable<BaseEvent> events, int expectedVersion) {
         var eventStream = eventStoreRepository.findByAggregateIdentifier(aggregateId);
 
         if (expectedVersion != -1 && eventStream.get(eventStream.size() - 1).getVersion() != expectedVersion) {
@@ -58,10 +57,10 @@ public class AccountEventStore implements EventStore {
     }
 
     @Override
-    public List<BaseEvent> getEvents(UUID aggregateId) {
+    public List<BaseEvent> getEvents(String aggregateId) {
         var eventStream = eventStoreRepository.findByAggregateIdentifier(aggregateId);
-        if (eventStream == null) {
-            throw new AggregateNotFoundException();
+        if (eventStream == null || eventStream.isEmpty()) {
+            throw new AggregateNotFoundException("Incorrect account ID provided!");
         }
         return eventStream.stream().map(x -> x.getEventData()).collect(Collectors.toList());
     }

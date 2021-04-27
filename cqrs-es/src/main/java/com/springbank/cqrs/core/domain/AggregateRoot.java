@@ -12,13 +12,13 @@ import java.util.logging.Logger;
 
 public abstract class AggregateRoot {
 
-    protected UUID id;
+    protected String id;
     private int version = -1;
 
     private final List<BaseEvent> changes = new ArrayList<>();
     private final Logger logger = Logger.getLogger(AggregateRoot.class.getName());
 
-    public UUID getId() {
+    public String getId() {
         return this.id;
     }
 
@@ -51,7 +51,7 @@ public abstract class AggregateRoot {
             var method = getClass().getDeclaredMethod("apply", event.getClass());
             method.setAccessible(true);
             method.invoke(this, event);
-        } catch (NoSuchMethodException ex) {
+        } catch (NoSuchMethodException e) {
             logger.log(Level.WARNING, MessageFormat.format("The apply method was not found in the aggregate for {0}", event.getClass().getName()));
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error applying event to Aggregate", e);
@@ -60,7 +60,4 @@ public abstract class AggregateRoot {
             if (isNewEvent) changes.add(event);
         }
     }
-
-
-
 }

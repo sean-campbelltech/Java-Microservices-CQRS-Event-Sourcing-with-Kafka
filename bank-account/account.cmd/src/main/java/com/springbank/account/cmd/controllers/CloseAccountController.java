@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.MessageFormat;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,7 +22,7 @@ public class CloseAccountController {
     private CommandDispatcher commandDispatcher;
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<BaseResponse> depositFunds(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<BaseResponse> depositFunds(@PathVariable(value = "id") String id) {
         try {
             commandDispatcher.send(new CloseAccountCommand(id));
             return new ResponseEntity<>(new BaseResponse("Bank account closure request successfully completed!"), HttpStatus.OK);

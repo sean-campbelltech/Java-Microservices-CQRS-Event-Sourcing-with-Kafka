@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
-import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class AccountEventSourcingHandler implements EventSourcingHandler<AccountAggregate> {
@@ -24,7 +22,7 @@ public class AccountEventSourcingHandler implements EventSourcingHandler<Account
     }
 
     @Override
-    public AccountAggregate getById(UUID id) {
+    public AccountAggregate getById(String id) {
         var aggregate = new AccountAggregate();
         var events = eventStore.getEvents(id);
         aggregate.replayEvents(events);

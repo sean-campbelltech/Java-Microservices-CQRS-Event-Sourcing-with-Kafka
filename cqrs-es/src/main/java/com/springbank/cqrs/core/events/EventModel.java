@@ -6,7 +6,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
-import java.util.UUID;
 
 @Data
 @Builder
@@ -15,7 +14,7 @@ public class EventModel {
     @Id
     private String id;
     private Date timeStamp;
-    private UUID aggregateIdentifier;
+    private String aggregateIdentifier;
     private String aggregateType;
     private Integer version;
     private String eventType;
