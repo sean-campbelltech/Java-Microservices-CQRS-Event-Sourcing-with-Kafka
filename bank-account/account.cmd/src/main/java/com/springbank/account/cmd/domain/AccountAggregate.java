@@ -8,9 +8,10 @@ import com.springbank.account.common.events.FundsWithdrawnEvent;
 import com.springbank.cqrs.core.domain.AggregateRoot;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @NoArgsConstructor
 public class AccountAggregate extends AggregateRoot {
-
     private Boolean active;
     private double balance;
 
@@ -22,6 +23,7 @@ public class AccountAggregate extends AggregateRoot {
         raiseEvent(AccountOpenedEvent.builder()
                     .id(command.getId())
                     .accountHolder(command.getAccountHolder())
+                    .creationDate(new Date())
                     .accountType(command.getAccountType())
                     .openingBalance(command.getOpeningBalance())
                     .build());

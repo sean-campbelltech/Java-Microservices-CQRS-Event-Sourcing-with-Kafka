@@ -11,7 +11,6 @@ import java.util.Comparator;
 
 @Service
 public class AccountEventSourcingHandler implements EventSourcingHandler<AccountAggregate> {
-
     @Autowired
     private EventStore eventStore;
 

@@ -27,17 +27,13 @@ public class AccountEventStore implements EventStore {
     @Override
     public <T extends AggregateRoot> void saveEvents(String aggregateId, Iterable<BaseEvent> events, int expectedVersion) {
         var eventStream = eventStoreRepository.findByAggregateIdentifier(aggregateId);
-
         if (expectedVersion != -1 && eventStream.get(eventStream.size() - 1).getVersion() != expectedVersion) {
             throw new ConcurrencyException();
         }
-
         var version = expectedVersion;
-
         for (var event: events) {
             version++;
             event.setVersion(version);
-
             var eventModel = EventModel.builder()
                     .timeStamp(new Date())
                     .aggregateIdentifier(aggregateId)
@@ -46,9 +42,7 @@ public class AccountEventStore implements EventStore {
                     .eventType(event.getClass().getTypeName())
                     .eventData(event)
                     .build();
-
             var persistedEvent = eventStoreRepository.save(eventModel);
-
             // only produce event if event was successfully persisted to the event store
             if (persistedEvent != null) {
                 eventProducer.produce(event.getClass().getSimpleName(), event);

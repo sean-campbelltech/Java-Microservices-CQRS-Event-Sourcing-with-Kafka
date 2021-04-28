@@ -1,15 +1,15 @@
 package com.springbank.account.cmd;
 
-import com.springbank.account.cmd.commands.CloseAccountCommand;
-import com.springbank.account.cmd.commands.OpenAccountCommand;
+import org.springframework.boot.SpringApplication;
 import com.springbank.account.cmd.handlers.CommandHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.springbank.account.cmd.commands.OpenAccountCommand;
+import com.springbank.account.cmd.commands.CloseAccountCommand;
 import com.springbank.account.cmd.commands.DepositFundsCommand;
 import com.springbank.account.cmd.commands.WithdrawFundsCommand;
 import com.springbank.cqrs.core.infrastructure.CommandDispatcher;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 import javax.annotation.PostConstruct;

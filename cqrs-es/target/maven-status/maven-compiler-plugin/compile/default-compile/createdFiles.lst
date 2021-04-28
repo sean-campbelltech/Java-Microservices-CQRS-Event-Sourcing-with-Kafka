@@ -3,6 +3,7 @@ com/springbank/cqrs/core/domain/AggregateRoot.class
 com/springbank/cqrs/core/events/BaseEvent$BaseEventBuilder.class
 com/springbank/cqrs/core/exceptions/AggregateNotFoundException.class
 com/springbank/cqrs/core/messages/Message$MessageBuilder.class
+com/springbank/cqrs/core/handlers/QueryHandler.class
 com/springbank/cqrs/core/infrastructure/CommandDispatcher.class
 com/springbank/cqrs/core/handlers/MessageHandler.class
 com/springbank/cqrs/core/commands/BaseCommand.class
@@ -12,6 +13,8 @@ com/springbank/cqrs/core/messages/Message$MessageBuilderImpl.class
 com/springbank/cqrs/core/infrastructure/EventStore.class
 com/springbank/cqrs/core/events/BaseEvent.class
 com/springbank/cqrs/core/events/EventModel$EventModelBuilder.class
+com/springbank/cqrs/core/queries/BaseQuery.class
 com/springbank/cqrs/core/events/EventModel.class
-com/springbank/cqrs/core/events/BaseEvent$BaseEventBuilderImpl.class
+com/springbank/cqrs/core/domain/BaseEntity.class
+com/springbank/cqrs/core/infrastructure/QueryDispatcher.class
 com/springbank/cqrs/core/messages/Message.class

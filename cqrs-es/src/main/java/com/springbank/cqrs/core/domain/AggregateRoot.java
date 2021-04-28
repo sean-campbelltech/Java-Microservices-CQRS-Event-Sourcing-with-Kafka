@@ -1,17 +1,14 @@
 package com.springbank.cqrs.core.domain;
 
 import com.springbank.cqrs.core.events.BaseEvent;
-import lombok.Getter;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public abstract class AggregateRoot {
-
     protected String id;
     private int version = -1;
 

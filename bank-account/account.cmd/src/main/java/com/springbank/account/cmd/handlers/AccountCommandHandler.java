@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AccountCommandHandler implements CommandHandler {
-
     @Autowired
     private EventSourcingHandler<AccountAggregate> eventSourcingHandler;
 
