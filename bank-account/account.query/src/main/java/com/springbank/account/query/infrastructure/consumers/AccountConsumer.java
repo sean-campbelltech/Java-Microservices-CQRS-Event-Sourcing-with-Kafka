@@ -1,10 +1,10 @@
-package com.springbank.account.query.Infrastructure.consumers;
+package com.springbank.account.query.infrastructure.consumers;
 
 import com.springbank.account.common.events.AccountClosedEvent;
 import com.springbank.account.common.events.AccountOpenedEvent;
 import com.springbank.account.common.events.FundsDepositedEvent;
 import com.springbank.account.common.events.FundsWithdrawnEvent;
-import com.springbank.account.query.Infrastructure.handlers.EventHandler;
+import com.springbank.account.query.infrastructure.handlers.EventHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.springbank.account.query.Infrastructure.consumers;
+package com.springbank.account.query.infrastructure.consumers;
 
 import com.springbank.account.common.events.AccountClosedEvent;
 import com.springbank.account.common.events.AccountOpenedEvent;

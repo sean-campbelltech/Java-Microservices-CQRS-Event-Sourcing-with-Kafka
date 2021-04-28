@@ -1,4 +1,4 @@
-package com.springbank.account.query.Infrastructure;
+package com.springbank.account.query.infrastructure;
 
 import com.springbank.cqrs.core.domain.BaseEntity;
 import com.springbank.cqrs.core.handlers.QueryHandler;
