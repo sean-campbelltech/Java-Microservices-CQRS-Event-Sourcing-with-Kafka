@@ -1,7 +1,7 @@
 package com.springbank.account.cmd.infrastructure;
 
 import com.springbank.account.cmd.domain.AccountAggregate;
-import com.springbank.account.cmd.repositories.EventStoreRepository;
+import com.springbank.account.cmd.domain.EventStoreRepository;
 import com.springbank.cqrs.core.domain.AggregateRoot;
 import com.springbank.cqrs.core.events.BaseEvent;
 import com.springbank.cqrs.core.events.EventModel;

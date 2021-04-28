@@ -1,10 +1,10 @@
 package com.springbank.account.query;
 
-import com.springbank.account.query.handlers.AccountQueryHandler;
-import com.springbank.account.query.queries.FindAccountByHolderQuery;
-import com.springbank.account.query.queries.FindAccountByIdQuery;
-import com.springbank.account.query.queries.FindAccountsWithBalanceQuery;
-import com.springbank.account.query.queries.FindAllAccountsQuery;
+import com.springbank.account.query.api.queries.AccountQueryHandler;
+import com.springbank.account.query.api.queries.FindAccountByHolderQuery;
+import com.springbank.account.query.api.queries.FindAccountByIdQuery;
+import com.springbank.account.query.api.queries.FindAccountsWithBalanceQuery;
+import com.springbank.account.query.api.queries.FindAllAccountsQuery;
 import com.springbank.cqrs.core.infrastructure.QueryDispatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -14,7 +14,6 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import javax.annotation.PostConstruct;
 
 @SpringBootApplication
-@EntityScan(basePackages = "com.springbank.account.common.models")
 public class QueryApplication {
 
 	@Autowired

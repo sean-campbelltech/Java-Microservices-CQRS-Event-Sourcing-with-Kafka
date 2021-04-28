@@ -1,6 +1,6 @@
 package com.springbank.account.cmd.domain;
 
-import com.springbank.account.cmd.commands.OpenAccountCommand;
+import com.springbank.account.cmd.api.commands.OpenAccountCommand;
 import com.springbank.account.common.events.AccountClosedEvent;
 import com.springbank.account.common.events.AccountOpenedEvent;
 import com.springbank.account.common.events.FundsDepositedEvent;
