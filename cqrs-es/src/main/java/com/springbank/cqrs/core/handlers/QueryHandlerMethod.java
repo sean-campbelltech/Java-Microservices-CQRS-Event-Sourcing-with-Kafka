@@ -6,6 +6,6 @@ import com.springbank.cqrs.core.queries.BaseQuery;
 import java.util.List;
 
 @FunctionalInterface
-public interface QueryHandler<T extends BaseQuery> {
+public interface QueryHandlerMethod<T extends BaseQuery> {
     List<BaseEntity> handle(T query);
 }

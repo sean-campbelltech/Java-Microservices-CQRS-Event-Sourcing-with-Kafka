@@ -1,7 +1,7 @@
 package com.springbank.account.query.infrastructure;
 
 import com.springbank.cqrs.core.domain.BaseEntity;
-import com.springbank.cqrs.core.handlers.QueryHandler;
+import com.springbank.cqrs.core.handlers.QueryHandlerMethod;
 import com.springbank.cqrs.core.infrastructure.QueryDispatcher;
 import com.springbank.cqrs.core.queries.BaseQuery;
 import org.springframework.stereotype.Service;
@@ -13,10 +13,10 @@ import java.util.Map;
 
 @Service
 public class AccountQueryDispatcher implements QueryDispatcher {
-    private final Map<Class<? extends BaseQuery>, List<QueryHandler>> routes = new HashMap<>();
+    private final Map<Class<? extends BaseQuery>, List<QueryHandlerMethod>> routes = new HashMap<>();
 
     @Override
-    public <T extends BaseQuery> void registerHandler(Class<T> type, QueryHandler<T> handler) {
+    public <T extends BaseQuery> void registerHandler(Class<T> type, QueryHandlerMethod<T> handler) {
         var handlers = routes.computeIfAbsent(type, c -> new LinkedList<>());
         handlers.add(handler);
     }

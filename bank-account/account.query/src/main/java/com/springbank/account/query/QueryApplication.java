@@ -1,6 +1,6 @@
 package com.springbank.account.query;
 
-import com.springbank.account.query.api.queries.AccountQueryHandler;
+import com.springbank.account.query.api.queries.QueryHandler;
 import com.springbank.account.query.api.queries.FindAccountByHolderQuery;
 import com.springbank.account.query.api.queries.FindAccountByIdQuery;
 import com.springbank.account.query.api.queries.FindAccountsWithBalanceQuery;
@@ -9,7 +9,6 @@ import com.springbank.cqrs.core.infrastructure.QueryDispatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import javax.annotation.PostConstruct;
 
@@ -20,7 +19,7 @@ public class QueryApplication {
 	private QueryDispatcher queryDispatcher;
 
 	@Autowired
-	private AccountQueryHandler queryHandler;
+	private QueryHandler queryHandler;
 
 	public static void main(String[] args) {
 		SpringApplication.run(QueryApplication.class, args);
