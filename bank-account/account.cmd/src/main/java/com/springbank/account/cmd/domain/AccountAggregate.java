@@ -49,6 +49,7 @@ public class AccountAggregate extends AggregateRoot {
     }
 
     public void apply(FundsDepositedEvent event) {
+        this.id = event.getId();
         this.balance += event.getAmount();
     }
 
@@ -63,6 +64,7 @@ public class AccountAggregate extends AggregateRoot {
     }
 
     public void apply(FundsWithdrawnEvent event) {
+        this.id = event.getId();
         this.balance -= event.getAmount();
     }
 
@@ -76,6 +78,7 @@ public class AccountAggregate extends AggregateRoot {
     }
 
     public void apply(AccountClosedEvent event) {
+        this.id = event.getId();
         this.active = false;
     }
 }
