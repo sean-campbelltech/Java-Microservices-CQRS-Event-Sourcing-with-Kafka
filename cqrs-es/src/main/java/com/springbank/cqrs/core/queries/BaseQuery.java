@@ -1,5 +1,5 @@
 package com.springbank.cqrs.core.queries;
 
-public class BaseQuery {
+public abstract class BaseQuery {
 
 }

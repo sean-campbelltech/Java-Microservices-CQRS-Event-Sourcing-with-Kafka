@@ -2,8 +2,7 @@ package com.springbank.account.cmd.infrastructure;
 
 import com.springbank.cqrs.core.commands.BaseCommand;
 import com.springbank.cqrs.core.infrastructure.CommandDispatcher;
-import com.springbank.cqrs.core.messages.Message;
-import com.springbank.cqrs.core.handlers.CommandHandlerMethod;
+import com.springbank.cqrs.core.commands.CommandHandlerMethod;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -11,9 +10,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+// The 'ConcreteMediator'
 @Service
 public class AccountCommandDispatcher implements CommandDispatcher {
-    private final Map<Class<? extends Message>, List<CommandHandlerMethod>> routes = new HashMap<>();
+    private final Map<Class<? extends BaseCommand>, List<CommandHandlerMethod>> routes = new HashMap<>();
 
     @Override
     public <T extends BaseCommand> void registerHandler(Class<T> type, CommandHandlerMethod<T> handler) {

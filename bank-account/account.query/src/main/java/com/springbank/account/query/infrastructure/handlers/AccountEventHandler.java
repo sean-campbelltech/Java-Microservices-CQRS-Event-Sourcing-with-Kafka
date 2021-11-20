@@ -11,17 +11,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AccountEventHandler implements EventHandler {
-    private final AccountRepository accountRepository;
-
     @Autowired
-    public AccountEventHandler(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
-    }
+    private AccountRepository accountRepository;
 
     @Override
     public void on(AccountOpenedEvent event) {
         var bankAccount = BankAccount.builder()
-                .id(event.getId().toString())
+                .id(event.getId())
                 .accountHolder(event.getAccountHolder())
                 .creationDate(event.getCreationDate())
                 .accountType(event.getAccountType())
@@ -32,28 +28,30 @@ public class AccountEventHandler implements EventHandler {
 
     @Override
     public void on(FundsDepositedEvent event) {
-        var bankAccount = accountRepository.findById(event.getId().toString());
+        var bankAccount = accountRepository.findById(event.getId());
         if (bankAccount.isEmpty()) {
             return;
         }
         var currentBalance = bankAccount.get().getBalance();
-        bankAccount.get().setBalance(currentBalance + event.getAmount());
+        var latestBalance = currentBalance + event.getAmount();
+        bankAccount.get().setBalance(latestBalance);
         accountRepository.save(bankAccount.get());
     }
 
     @Override
     public void on(FundsWithdrawnEvent event) {
-        var bankAccount = accountRepository.findById(event.getId().toString());
+        var bankAccount = accountRepository.findById(event.getId());
         if (bankAccount.isEmpty()) {
             return;
         }
         var currentBalance = bankAccount.get().getBalance();
-        bankAccount.get().setBalance(currentBalance - event.getAmount());
+        var latestBalance = currentBalance - event.getAmount();
+        bankAccount.get().setBalance(latestBalance);
         accountRepository.save(bankAccount.get());
     }
 
     @Override
     public void on(AccountClosedEvent event) {
-        accountRepository.deleteById(event.getId().toString());
+        accountRepository.deleteById(event.getId());
     }
 }

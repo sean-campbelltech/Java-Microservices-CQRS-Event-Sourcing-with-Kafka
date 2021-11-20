@@ -1,7 +1,7 @@
 package com.springbank.account.query.infrastructure;
 
 import com.springbank.cqrs.core.domain.BaseEntity;
-import com.springbank.cqrs.core.handlers.QueryHandlerMethod;
+import com.springbank.cqrs.core.queries.QueryHandlerMethod;
 import com.springbank.cqrs.core.infrastructure.QueryDispatcher;
 import com.springbank.cqrs.core.queries.BaseQuery;
 import org.springframework.stereotype.Service;
@@ -22,13 +22,13 @@ public class AccountQueryDispatcher implements QueryDispatcher {
     }
 
     @Override
-    public <T extends BaseEntity> List<T> send(BaseQuery query) {
+    public <U extends BaseEntity> List<U> send(BaseQuery query) {
         var handlers = routes.get(query.getClass());
         if(handlers == null || handlers.size() <= 0) {
-            throw new RuntimeException("No command handler was registered!");
+            throw new RuntimeException("No query handler was registered!");
         }
         if(handlers.size() > 1) {
-            throw new RuntimeException("Cannot send command to more than one handler!");
+            throw new RuntimeException("Cannot send query to more than one handler!");
         }
         return handlers.get(0).handle(query);
     }

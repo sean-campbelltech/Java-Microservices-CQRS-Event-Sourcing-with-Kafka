@@ -22,7 +22,7 @@ public class CloseAccountController {
     private CommandDispatcher commandDispatcher;
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<BaseResponse> depositFunds(@PathVariable(value = "id") String id) {
+    public ResponseEntity<BaseResponse> closeAccount(@PathVariable(value = "id") String id) {
         try {
             commandDispatcher.send(new CloseAccountCommand(id));
             return new ResponseEntity<>(new BaseResponse("Bank account closure request successfully completed!"), HttpStatus.OK);

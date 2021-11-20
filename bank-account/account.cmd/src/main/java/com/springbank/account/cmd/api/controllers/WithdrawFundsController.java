@@ -22,7 +22,7 @@ public class WithdrawFundsController {
     private CommandDispatcher commandDispatcher;
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<BaseResponse> depositFunds(@PathVariable(value = "id") String id,
+    public ResponseEntity<BaseResponse> withdrawFunds(@PathVariable(value = "id") String id,
                                                      @RequestBody WithdrawFundsCommand command) {
         try {
             command.setId(id);

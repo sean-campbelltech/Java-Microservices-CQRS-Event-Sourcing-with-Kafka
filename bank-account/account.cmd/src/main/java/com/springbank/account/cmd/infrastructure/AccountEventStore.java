@@ -2,7 +2,6 @@ package com.springbank.account.cmd.infrastructure;
 
 import com.springbank.account.cmd.domain.AccountAggregate;
 import com.springbank.account.cmd.domain.EventStoreRepository;
-import com.springbank.cqrs.core.domain.AggregateRoot;
 import com.springbank.cqrs.core.events.BaseEvent;
 import com.springbank.cqrs.core.events.EventModel;
 import com.springbank.cqrs.core.infrastructure.EventStore;
@@ -25,7 +24,7 @@ public class AccountEventStore implements EventStore {
     private EventStoreRepository eventStoreRepository;
 
     @Override
-    public <T extends AggregateRoot> void saveEvents(String aggregateId, Iterable<BaseEvent> events, int expectedVersion) {
+    public void saveEvents(String aggregateId, Iterable<BaseEvent> events, int expectedVersion) {
         var eventStream = eventStoreRepository.findByAggregateIdentifier(aggregateId);
         if (expectedVersion != -1 && eventStream.get(eventStream.size() - 1).getVersion() != expectedVersion) {
             throw new ConcurrencyException();
@@ -44,7 +43,7 @@ public class AccountEventStore implements EventStore {
                     .build();
             var persistedEvent = eventStoreRepository.save(eventModel);
             // only produce event if event was successfully persisted to the event store
-            if (persistedEvent != null) {
+            if (!persistedEvent.getId().isEmpty()) {
                 eventProducer.produce(event.getClass().getSimpleName(), event);
             }
         }

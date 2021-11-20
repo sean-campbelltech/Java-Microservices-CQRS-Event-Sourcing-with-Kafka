@@ -20,7 +20,7 @@ public abstract class AggregateRoot {
     }
 
     public int getVersion() {
-        return version;
+        return this.version;
     }
 
     public void setVersion(int version) {
@@ -28,19 +28,11 @@ public abstract class AggregateRoot {
     }
 
     public List<BaseEvent> getUncommittedChanges(){
-        return changes;
+        return this.changes;
     }
 
     public void markChangesAsCommitted() {
-        changes.clear();
-    }
-
-    public void replayEvents(Iterable<BaseEvent> events) {
-        events.forEach(event -> applyChange(event, false));
-    }
-
-    public void raiseEvent(BaseEvent event) {
-        applyChange(event, true);
+        this.changes.clear();
     }
 
     protected void applyChange(BaseEvent event, Boolean isNewEvent) {
@@ -54,7 +46,17 @@ public abstract class AggregateRoot {
             logger.log(Level.SEVERE, "Error applying event to Aggregate", e);
         }
         finally {
-            if (isNewEvent) changes.add(event);
+            if (isNewEvent) {
+                changes.add(event);
+            }
         }
+    }
+
+    public void raiseEvent(BaseEvent event) {
+        applyChange(event, true);
+    }
+
+    public void replayEvents(Iterable<BaseEvent> events) {
+        events.forEach(event -> applyChange(event, false));
     }
 }

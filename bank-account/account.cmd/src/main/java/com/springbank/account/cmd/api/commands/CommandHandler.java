@@ -5,6 +5,7 @@ import com.springbank.account.cmd.api.commands.DepositFundsCommand;
 import com.springbank.account.cmd.api.commands.OpenAccountCommand;
 import com.springbank.account.cmd.api.commands.WithdrawFundsCommand;
 
+// The 'AbstractColleague'
 public interface CommandHandler {
     void handle(OpenAccountCommand command);
     void handle(DepositFundsCommand command);

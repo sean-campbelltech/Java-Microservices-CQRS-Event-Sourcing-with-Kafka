@@ -1,4 +1,4 @@
-package com.springbank.cqrs.core.handlers;
+package com.springbank.cqrs.core.commands;
 
 import com.springbank.cqrs.core.commands.BaseCommand;
 

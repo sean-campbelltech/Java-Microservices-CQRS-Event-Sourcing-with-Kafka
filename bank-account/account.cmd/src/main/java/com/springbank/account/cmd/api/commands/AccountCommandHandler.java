@@ -5,6 +5,7 @@ import com.springbank.cqrs.core.handlers.EventSourcingHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+// The 'ConcreteColleague' class
 @Service
 public class AccountCommandHandler implements CommandHandler {
     @Autowired
