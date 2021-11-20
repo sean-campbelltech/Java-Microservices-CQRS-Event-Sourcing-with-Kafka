@@ -8,17 +8,14 @@
 		<version>2.4.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-
-	<groupId>com.springbank</groupId>
+	<groupId>com.techbank</groupId>
 	<artifactId>account.cmd</artifactId>
 	<version>1.0.0</version>
 	<name>account.cmd</name>
 	<description>Bank Account Command API Project</description>
-
 	<properties>
 		<java.version>16</java.version>
 	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -34,24 +31,22 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-			<version>1.18.20</version>
+			<groupId>com.techbank</groupId>
+			<artifactId>cqrs.core</artifactId>
+			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.springbank</groupId>
+			<groupId>com.techbank</groupId>
 			<artifactId>account.common</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.springbank</groupId>
-			<artifactId>cqrs.core</artifactId>
-			<version>1.0.0</version>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -62,7 +57,6 @@
 			<artifactId>spring-kafka-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -70,16 +64,16 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
 			</plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>15</source>
-                    <target>15</target>
-                </configuration>
-            </plugin>
-        </plugins>
+		</plugins>
 	</build>
 
 </project>

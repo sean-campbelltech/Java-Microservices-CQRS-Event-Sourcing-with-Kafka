@@ -13,9 +13,6 @@
         <module name="account.cmd" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="account.core" target="15" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
