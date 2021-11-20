@@ -1,12 +1,8 @@
 package com.springbank.account.cmd;
 
+import com.springbank.account.cmd.api.commands.*;
 import org.springframework.boot.SpringApplication;
-import com.springbank.account.cmd.api.commands.CommandHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.springbank.account.cmd.api.commands.OpenAccountCommand;
-import com.springbank.account.cmd.api.commands.CloseAccountCommand;
-import com.springbank.account.cmd.api.commands.DepositFundsCommand;
-import com.springbank.account.cmd.api.commands.WithdrawFundsCommand;
 import com.springbank.cqrs.core.infrastructure.CommandDispatcher;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -34,5 +30,6 @@ public class CommandApplication {
 		commandDispatcher.registerHandler(DepositFundsCommand.class, commandHandler::handle);
 		commandDispatcher.registerHandler(WithdrawFundsCommand.class, commandHandler::handle);
 		commandDispatcher.registerHandler(CloseAccountCommand.class, commandHandler::handle);
+		commandDispatcher.registerHandler(RestoreReadDbCommand.class, commandHandler::handle);
 	}
 }

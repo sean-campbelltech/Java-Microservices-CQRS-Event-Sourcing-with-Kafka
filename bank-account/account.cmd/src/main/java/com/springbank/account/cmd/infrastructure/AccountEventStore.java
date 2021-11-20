@@ -30,17 +30,12 @@ public class AccountEventStore implements EventStore {
             throw new ConcurrencyException();
         }
         var version = expectedVersion;
-        for (var event: events) {
+        for (var event : events) {
             version++;
             event.setVersion(version);
-            var eventModel = EventModel.builder()
-                    .timeStamp(new Date())
-                    .aggregateIdentifier(aggregateId)
-                    .aggregateType(AccountAggregate.class.getTypeName())
-                    .version(version)
-                    .eventType(event.getClass().getTypeName())
-                    .eventData(event)
-                    .build();
+            var eventModel = EventModel.builder().timeStamp(new Date()).aggregateIdentifier(aggregateId)
+                    .aggregateType(AccountAggregate.class.getTypeName()).version(version)
+                    .eventType(event.getClass().getTypeName()).eventData(event).build();
             var persistedEvent = eventStoreRepository.save(eventModel);
             // only produce event if event was successfully persisted to the event store
             if (!persistedEvent.getId().isEmpty()) {
@@ -56,5 +51,14 @@ public class AccountEventStore implements EventStore {
             throw new AggregateNotFoundException("Incorrect account ID provided!");
         }
         return eventStream.stream().map(x -> x.getEventData()).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> getAggregateIds() {
+        var eventStream = eventStoreRepository.findAll();
+        if (eventStream == null || eventStream.isEmpty()) {
+            throw new IllegalStateException("Could not retrieve event stream from the event store!");
+        }
+        return eventStream.stream().map(EventModel::getAggregateIdentifier).distinct().collect(Collectors.toList());
     }
 }
