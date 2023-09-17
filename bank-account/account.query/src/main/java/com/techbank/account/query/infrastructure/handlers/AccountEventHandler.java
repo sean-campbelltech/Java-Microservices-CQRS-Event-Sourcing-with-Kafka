@@ -46,6 +46,7 @@ public class AccountEventHandler implements EventHandler {
         }
         var currentBalance = bankAccount.get().getBalance();
         var latestBalance = currentBalance - event.getAmount();
+        bankAccount.get().setBalance(latestBalance);
         accountRepository.save(bankAccount.get());
     }
 
